@@ -129,7 +129,7 @@
             width: 256,
             height: 256,
             typeNumber: -1,
-            correctLevel: QRErrorCorrectLevel.H,
+            correctLevel: 'H',
             background: "#ffffff",
             foreground: "#000000"
         }, options);
