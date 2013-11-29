@@ -1,4 +1,4 @@
-(function ($, document){
+(function ($, window, document){
     var support = (function (support){
             var type = (window.SVGAngle
                 || document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#BasicStructure', '1.1')
@@ -161,4 +161,4 @@
             $(this).empty().append(element);
         });
     };
-})(jQuery, document);
+})(jQuery, this, document);
