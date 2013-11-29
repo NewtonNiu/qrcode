@@ -91,8 +91,8 @@
                 + ';fill:' + options.background + ';"></path>';
 
         //绘制二维码
-        for (var row = 0; row < qrcode.getModuleCount(); row++) {
-            for (var col = 0; col < qrcode.getModuleCount(); col++) {
+        for (var row = 0; row < moduleCount; row++) {
+            for (var col = 0; col < moduleCount; col++) {
                 svg += rectHead + 'd="M ' + col * 10 + ' ' + row * 10
                     + ' L ' + (col + 1) * 10 + ' ' + row * 10
                     + ' L ' + (col + 1) * 10 + ' ' + (row + 1) * 10
