@@ -8,13 +8,13 @@
 // Licensed under the MIT license:
 //   http://www.opensource.org/licenses/mit-license.php
 //
-// The word "QR Code" is registered trademark of 
+// The word "QR Code" is registered trademark of
 // DENSO WAVE INCORPORATED
 //   http://www.denso-wave.com/qrcode/faqpatent-e.html
 //
 //---------------------------------------------------------------------
 
-(function(window){
+(function (window){
     //---------------------------------------------------------------------
     // QR8bitByte
     //---------------------------------------------------------------------
@@ -45,7 +45,8 @@
     function QRCode(typeNumber, errorCorrectLevel){
         errorCorrectLevel = QRErrorCorrectLevel[errorCorrectLevel];
         this.typeNumber = typeNumber;
-        this.errorCorrectLevel = errorCorrectLevel !== undefined ? errorCorrectLevel : QRErrorCorrectLevel.H;;
+        this.errorCorrectLevel = errorCorrectLevel !== undefined ? errorCorrectLevel : QRErrorCorrectLevel.H;
+        ;
         this.modules = null;
         this.moduleCount = 0;
         this.dataCache = null;
@@ -1260,6 +1261,6 @@
     //---------------------------------------------------------------------
     // exports QRCode
     //---------------------------------------------------------------------
-    
+
     window.QRCode = QRCode;
 }(this));
