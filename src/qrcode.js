@@ -43,8 +43,9 @@
     //---------------------------------------------------------------------
 
     function QRCode(typeNumber, errorCorrectLevel){
+        errorCorrectLevel = QRErrorCorrectLevel[errorCorrectLevel];
         this.typeNumber = typeNumber;
-        this.errorCorrectLevel = errorCorrectLevel;
+        this.errorCorrectLevel = errorCorrectLevel !== undefined ? errorCorrectLevel : QRErrorCorrectLevel.H;;
         this.modules = null;
         this.moduleCount = 0;
         this.dataCache = null;
