@@ -118,7 +118,7 @@
     // jquery qrcode
     $.fn.qrcode = function (options){
         // if options is string,
-        if (typeof options === "string") {
+        if (typeof options === 'string') {
             options = { text: options };
         }
 
