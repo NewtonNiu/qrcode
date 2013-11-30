@@ -81,9 +81,9 @@
 
     function createSVG(qrcode, options){
         var moduleCount = qrcode.getModuleCount(),
-            svg = '<svg xmlns="http://www.w3.org/2000/svg" height="'
-                + options.height + '" width="' + options.width
-                + '" viewbox="0 0 ' + moduleCount * 10 + ' ' + moduleCount * 10 + '">',
+            svg = '<svg xmlns="http://www.w3.org/2000/svg" '
+                + 'width="'+ options.width + 'px" height="' + options.height + 'px" '
+                + 'viewbox="0 0 ' + moduleCount * 10 + ' ' + moduleCount * 10 + '">',
             rectHead = '<path ',
             foreRect = ' style="stroke-width:1;stroke:' + options.foreground
                 + ';fill:' + options.foreground + ';"></path>',
