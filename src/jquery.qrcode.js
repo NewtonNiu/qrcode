@@ -94,10 +94,10 @@
         //绘制二维码
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-                svg += rectHead + 'd="M ' + col * 10 + ' ' + row * 10
-                    + ' L ' + (col + 1) * 10 + ' ' + row * 10
-                    + ' L ' + (col + 1) * 10 + ' ' + (row + 1) * 10
-                    + ' L ' + col * 10 + ' ' + (row + 1) * 10
+                svg += rectHead + 'd="M ' + col * 10 + ',' + row * 10
+                    + ' L ' + (col + 1) * 10 + ',' + row * 10
+                    + ' L ' + (col + 1) * 10 + ',' + (row + 1) * 10
+                    + ' L ' + col * 10 + ',' + (row + 1) * 10
                     + ' Z"';
                 svg += qrcode.isDark(row, col) ? foreRect : backRect;
             }
