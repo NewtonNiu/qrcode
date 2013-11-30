@@ -50,8 +50,9 @@
 
     function createVML(qrcode, options){
         var moduleCount = qrcode.getModuleCount(),
-            vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" style="width:' + (options.width - 2) * moduleCount
-                + 'px;height:' + (options.height - 2) * moduleCount + 'px;behavior:url(#default#VML);'
+            vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
+                + 'style="width:' + (options.width - 2) * moduleCount + 'px;'
+                + 'height:' + (options.height - 2) * moduleCount + 'px;behavior:url(#default#VML);'
                 + 'position:relative;top:0;left:0;display:inline-block;padding:0;margin:0;border:none;" '
                 + 'coordorigin="0,0" coordsize="' + moduleCount * 10 + ',' + moduleCount * 10 + '">',
             rectHead = '<vml:shape style="width:10px;height:10px;behavior:url(#default#VML);padding:0;' +
