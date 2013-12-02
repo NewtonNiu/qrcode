@@ -1,5 +1,5 @@
 (function ($, window, document){
-    // 探测浏览器支持
+    // detecting browser support
     var support = (function (support){
         var type = (window.SVGAngle
             || document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#BasicStructure', '1.1')
@@ -24,7 +24,7 @@
         return support;
     }({}));
 
-    // canvas绘制
+    // draw qrcode by canvas
     function createCanvas(qrcode, options){
         // create canvas element
         var canvas = document.createElement("canvas"),
@@ -50,7 +50,7 @@
         return canvas;
     }
 
-    // vml绘制
+    // draw qrcode by vml
     function createVML(qrcode, options){
         var moduleCount = qrcode.getModuleCount(),
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
@@ -63,7 +63,7 @@
             foreRect = ' strokecolor="' + options.foreground + '" fillcolor="' + options.foreground + '"></vml:shape>',
             backRect = ' strokecolor="' + options.background + '" fillcolor="' + options.background + '"></vml:shape>';
 
-        //绘制二维码
+        // draw in the vml
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
                 vml += rectHead + 'path="M ' + col * 10 + ',' + row * 10
@@ -79,11 +79,11 @@
         vml = '<div style="width:' + options.width + 'px;height:'
             + options.height + 'px;margin:0px;padding:0;">' + vml + '</div>';
 
-        //返回vml节点
+        // return just built vml
         return $(vml)[0];
     }
 
-    // svg绘制
+    // draw qrcode by svg
     function createSVG(qrcode, options){
         var moduleCount = qrcode.getModuleCount(),
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
@@ -95,7 +95,7 @@
             backRect = ' style="stroke-width:1;stroke:' + options.background
                 + ';fill:' + options.background + ';"></path>';
 
-        //绘制二维码
+        // draw in the svg
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
                 svg += rectHead + 'd="M ' + col * 10 + ',' + row * 10
@@ -109,11 +109,11 @@
 
         svg += '</svg>';
 
-        //返回svg节点
+        // return just built svg
         return $(svg)[0];
     }
 
-    // 自动绘制，根据浏览器支持自动选择合适的绘制方式
+    // draw qrcode by auto
     function createDefault(qrcode, options){
         if (support.canvas) return createCanvas(qrcode, options);
         if (support.svg) return createSVG(qrcode, options);
