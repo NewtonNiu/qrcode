@@ -93,9 +93,8 @@
     // draw qrcode by svg
     function createSVG(qrcode, options){
         var x, dx, y, dy,
-            scale = (options.width / options.height).toPrecision(4),
-            moduleCount = qrcode.getModuleCount(), 
             moduleCount = qrcode.getModuleCount(),
+            scale = (options.width / options.height).toPrecision(4),
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
                 + 'width="'+ options.width + 'px" height="' + options.height + 'px" '
                 + 'viewbox="0 0 ' + moduleCount * 10 + ' ' + Math.ceil(moduleCount * 10 / scale) + '">',
