@@ -1,4 +1,5 @@
 (function ($, window, document){
+    // 探测浏览器支持
     var support = (function (support){
         var type = (window.SVGAngle
             || document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#BasicStructure', '1.1')
