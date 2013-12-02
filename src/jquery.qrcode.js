@@ -100,9 +100,9 @@
                 + 'width="'+ options.width + 'px" height="' + options.height + 'px" '
                 + 'viewbox="0 0 ' + moduleCount * 10 + ' ' + Math.ceil(moduleCount * 10 / scale) + '">',
             rectHead = '<path ',
-            foreRect = ' style="stroke-width:0.3;stroke:' + options.foreground
+            foreRect = ' style="stroke-width:0.5;stroke:' + options.foreground
                 + ';fill:' + options.foreground + ';"></path>',
-            backRect = ' style="stroke-width:0.3;stroke:' + options.background
+            backRect = ' style="stroke-width:0.5;stroke:' + options.background
                 + ';fill:' + options.background + ';"></path>';
 
         // draw in the svg
