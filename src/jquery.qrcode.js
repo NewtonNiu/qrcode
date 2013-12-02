@@ -94,10 +94,10 @@
     function createSVG(qrcode, options){
         var x, dx, y, dy,
             moduleCount = qrcode.getModuleCount(),
-            scale = (options.width / options.height).toPrecision(4),
+            scale = options.width / options.height,
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
                 + 'width="'+ options.width + 'px" height="' + options.height + 'px" '
-                + 'viewbox="0 0 ' + moduleCount * 10 + ' ' + Math.ceil(moduleCount * 10 / scale) + '">',
+                + 'viewbox="0 0 ' + moduleCount * 10 + ' ' + moduleCount * 10 / scale + '">',
             rectHead = '<path ',
             foreRect = ' style="stroke-width:0.5;stroke:' + options.foreground
                 + ';fill:' + options.foreground + ';"></path>',
@@ -108,9 +108,9 @@
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
                 x = col * 10;
-                y = Math.ceil(row * 10 / scale);
+                y = row * 10 / scale;
                 dx = (col + 1) * 10;
-                dy = Math.ceil((row + 1) * 10 / scale);
+                dy = (row + 1) * 10 / scale;
                 
                 svg += rectHead + 'd="M ' + x + ',' + y
                     + ' L ' + dx + ',' + y
