@@ -1,4 +1,4 @@
-// 编码转换
+// 编码转换，用以支持中文二维码
 function utf16to8(str){
     var code,
         out = '';
