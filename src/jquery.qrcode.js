@@ -1,28 +1,29 @@
 (function ($, window, document){
     var support = (function (support){
-            var type = (window.SVGAngle
-                || document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#BasicStructure', '1.1')
-                ? 'SVG' : 'VML');
+        var type = (window.SVGAngle
+            || document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#BasicStructure', '1.1')
+            ? 'SVG' : 'VML');
 
-            if (type === 'VML') {
-                var shape,
-                    element = document.createElement('div');
+        if (type === 'VML') {
+            var shape,
+                element = document.createElement('div');
 
-                element.innerHTML = '<v:shape adj="1"/>';
-                shape = element.firstChild;
+            element.innerHTML = '<v:shape adj="1"/>';
+            shape = element.firstChild;
 
-                shape.style.behavior = 'url(#default#VML)';
-                if (!(shape && typeof shape.adj == 'object')) {
-                    type = '';
-                }
-                element = null;
+            shape.style.behavior = 'url(#default#VML)';
+            if (!(shape && typeof shape.adj == 'object')) {
+                type = '';
             }
+            element = null;
+        }
 
-            support.svg = !(support.vml = type === 'VML');
-            support.canvas = !!document.createElement("canvas").getContext;
-            return support;
-        }({}));
+        support.svg = !(support.vml = type === 'VML');
+        support.canvas = !!document.createElement("canvas").getContext;
+        return support;
+    }({}));
 
+    // canvas绘制
     function createCanvas(qrcode, options){
         // create canvas element
         var canvas = document.createElement("canvas"),
@@ -48,6 +49,7 @@
         return canvas;
     }
 
+    // vml绘制
     function createVML(qrcode, options){
         var moduleCount = qrcode.getModuleCount(),
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
@@ -80,6 +82,7 @@
         return $(vml)[0];
     }
 
+    // svg绘制
     function createSVG(qrcode, options){
         var moduleCount = qrcode.getModuleCount(),
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
@@ -109,6 +112,7 @@
         return $(svg)[0];
     }
 
+    // 自动绘制，根据浏览器支持自动选择合适的绘制方式
     function createDefault(qrcode, options){
         if (support.canvas) return createCanvas(qrcode, options);
         if (support.svg) return createSVG(qrcode, options);
