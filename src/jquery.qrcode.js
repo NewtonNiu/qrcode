@@ -52,7 +52,8 @@
 
     // draw qrcode by vml
     function createVML(qrcode, options){
-        var moduleCount = qrcode.getModuleCount(),
+        var x, dx, y, dy,
+            moduleCount = qrcode.getModuleCount(),
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
                 + 'style="width:' + (options.width - 2) * moduleCount + 'px;'
                 + 'height:' + (options.height - 2) * moduleCount + 'px;behavior:url(#default#VML);'
@@ -66,11 +67,17 @@
         // draw in the vml
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-                vml += rectHead + 'path="M ' + col * 10 + ',' + row * 10
-                    + ' L ' + (col + 1) * 10 + ',' + row * 10
-                    + ' L ' + (col + 1) * 10 + ',' + (row + 1) * 10
-                    + ' L ' + col * 10 + ',' + (row + 1) * 10
+                x = col * 10;
+                y = row * 10;
+                dx = (col + 1) * 10;
+                dy = (row + 1) * 10;
+                
+                vml += rectHead + 'path="M ' + x + ',' + y
+                    + ' L ' + dx + ',' + y
+                    + ' L ' + dx + ',' + dy
+                    + ' L ' + x + ',' + dy
                     + ' X"';
+                    
                 vml += qrcode.isDark(row, col) ? foreRect : backRect;
             }
         }
@@ -85,10 +92,13 @@
 
     // draw qrcode by svg
     function createSVG(qrcode, options){
-        var moduleCount = qrcode.getModuleCount(),
+        var x, dx, y, dy,
+            scale = (options.width / options.height).toPrecision(4),
+            moduleCount = qrcode.getModuleCount(), 
+            moduleCount = qrcode.getModuleCount(),
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
                 + 'width="'+ options.width + 'px" height="' + options.height + 'px" '
-                + 'viewbox="0 0 ' + moduleCount * 10 + ' ' + moduleCount * 10 + '">',
+                + 'viewbox="0 0 ' + moduleCount * 10 + ' ' + Math.ceil(moduleCount * 10 / scale) + '">',
             rectHead = '<path ',
             foreRect = ' style="stroke-width:1;stroke:' + options.foreground
                 + ';fill:' + options.foreground + ';"></path>',
@@ -98,11 +108,17 @@
         // draw in the svg
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-                svg += rectHead + 'd="M ' + col * 10 + ',' + row * 10
-                    + ' L ' + (col + 1) * 10 + ',' + row * 10
-                    + ' L ' + (col + 1) * 10 + ',' + (row + 1) * 10
-                    + ' L ' + col * 10 + ',' + (row + 1) * 10
+                x = col * 10;
+                y = Math.ceil(row * 10 / scale);
+                dx = (col + 1) * 10;
+                dy = Math.ceil((row + 1) * 10 / scale);
+                
+                svg += rectHead + 'd="M ' + x + ',' + y
+                    + ' L ' + dx + ',' + y
+                    + ' L ' + dx + ',' + dy
+                    + ' L ' + x + ',' + dy
                     + ' Z"';
+                    
                 svg += qrcode.isDark(row, col) ? foreRect : backRect;
             }
         }
