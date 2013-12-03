@@ -121,19 +121,19 @@
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
             	if (qrcode.isDark(row, col)) {
-	                x = col * 10;
-	                y = row * 10 * scale;
-	                dx = (col + 1) * 10;
-	                dy = (row + 1) * 10 * scale;
-	                
-	                svg += rectHead + 'd="M ' + x + ',' + y
-	                    + ' L ' + dx + ',' + y
-	                    + ' L ' + dx + ',' + dy
-	                    + ' L ' + x + ',' + dy
-	                    + ' Z"';
-	                    
-	                svg += rectFoot;
-	            }
+					x = col * 10;
+					y = row * 10 * scale;
+					dx = (col + 1) * 10;
+					dy = (row + 1) * 10 * scale;
+					
+					svg += rectHead + 'd="M ' + x + ',' + y
+					+ ' L ' + dx + ',' + y
+					+ ' L ' + dx + ',' + dy
+					+ ' L ' + x + ',' + dy
+					+ ' Z"';
+					
+					svg += rectFoot;
+				}
             }
         }
 
