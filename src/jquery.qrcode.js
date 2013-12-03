@@ -30,8 +30,8 @@
         var canvas = document.createElement('canvas'),
             context = canvas.getContext('2d'),
             moduleCount = qrcode.getModuleCount(), // qrcode count
-            width = options.width / moduleCount.toPrecision(4), // compute width based on options.width
-            height = options.height / moduleCount.toPrecision(4); // compute height based on options.height
+            width = options.width / moduleCount, // compute width based on options.width
+            height = options.height / moduleCount; // compute height based on options.height
 
         canvas.width = options.width;
         canvas.height = options.height;
