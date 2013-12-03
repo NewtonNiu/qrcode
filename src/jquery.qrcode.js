@@ -42,11 +42,8 @@
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
                 if (qrcode.isDark(row, col)) {
-                    var w = (Math.ceil((col + 1) * width) - Math.floor(col * width)),
-                        h = (Math.ceil((row + 1) * width) - Math.floor(row * width));
-
                     context.fillStyle = options.foreground;
-                    context.fillRect(Math.round(col * width), Math.round(row * height), w, h);
+                    context.fillRect(col * width, row * height, width, height);
                 }
             }
         }
