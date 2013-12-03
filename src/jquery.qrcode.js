@@ -46,6 +46,7 @@
                 context.fillRect(Math.round(col * width), Math.round(row * height), w, h);
             }
         }
+        
         // return just built canvas
         return canvas;
     }
