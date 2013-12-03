@@ -41,13 +41,13 @@
         // draw in the canvas
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-            	if (qrcode.isDark(row, col)) {
-	                var w = (Math.ceil((col + 1) * width) - Math.floor(col * width)),
-	                    h = (Math.ceil((row + 1) * width) - Math.floor(row * width));
+                if (qrcode.isDark(row, col)) {
+                    var w = (Math.ceil((col + 1) * width) - Math.floor(col * width)),
+                        h = (Math.ceil((row + 1) * width) - Math.floor(row * width));
 
-					context.fillStyle = options.foreground;
-	                context.fillRect(Math.round(col * width), Math.round(row * height), w, h);
-            	}
+                    context.fillStyle = options.foreground;
+                    context.fillRect(Math.round(col * width), Math.round(row * height), w, h);
+                }
             }
         }
         // return just built canvas
@@ -57,8 +57,8 @@
     // draw qrcode by vml
     function createVML(qrcode, options){
         var moduleCount = qrcode.getModuleCount(),
-        	x = y = 0, 
-        	dx = dy = moduleCount * 10,           
+            x = y = 0,
+            dx = dy = moduleCount * 10,
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
                 + 'style="behavior:url(#default#VML);position:relative;'
                 + 'display:block;padding:0;margin:0;border:none;'
@@ -67,11 +67,11 @@
                 + 'coordorigin="0,0" coordsize="' + dx + ',' + dy + '">'
                 + '<vml:shape style="behavior:url(#default#VML);width:10px;height:10px;padding:0;'
                 + 'margin:0;border:none;" stroked="true" filled="true" strokeweight="1px" '
-                + 'strokecolor="' + options.background + '" fillcolor="' + options.background +'" '
-                + 'path="M 0,0 L ' + dx + ',0 L ' + dx + ',' + dy + ' L 0,' + dy +' X"></vml:shape>',
+                + 'strokecolor="' + options.background + '" fillcolor="' + options.background + '" '
+                + 'path="M 0,0 L ' + dx + ',0 L ' + dx + ',' + dy + ' L 0,' + dy + ' X"></vml:shape>',
             rectHead = '<vml:shape style="behavior:url(#default#VML);width:10px;height:10px;padding:0;'
-            	+ 'margin:0;border:none;" stroked="true" filled="true" strokeweight="1px" '
-            	+ 'strokecolor="' + options.foreground + '" fillcolor="' + options.foreground + '" ',
+                + 'margin:0;border:none;" stroked="true" filled="true" strokeweight="1px" '
+                + 'strokecolor="' + options.foreground + '" fillcolor="' + options.foreground + '" ',
             rectFoot = '></vml:shape>';
 
         // draw in the vml
@@ -82,14 +82,14 @@
                     y = row * 10;
                     dx = (col + 1) * 10;
                     dy = (row + 1) * 10;
-                    
+
                     vml += rectHead + 'path="M ' + x + ',' + y
                         + ' L ' + dx + ',' + y
                         + ' L ' + dx + ',' + dy
                         + ' L ' + x + ',' + dy
                         + ' X"';
-                        
-                    vml +=  rectFoot;
+
+                    vml += rectFoot;
                 }
             }
         }
@@ -107,33 +107,33 @@
         var moduleCount = qrcode.getModuleCount(),
             scale = options.height / options.width,
             x = y = 0,
-        	dx = moduleCount * 10,
-        	dy = moduleCount * 10 * scale,
+            dx = moduleCount * 10,
+            dy = moduleCount * 10 * scale,
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
-                + 'width="'+ options.width + 'px" height="' + options.height + 'px" '
+                + 'width="' + options.width + 'px" height="' + options.height + 'px" '
                 + 'style="padding:0;margin:0;border:none;background:' + options.background + ';" '
                 + 'viewbox="0 0 ' + dx + ' ' + dy + '">',
             rectHead = '<path style="padding:0;margin:0;border:none;stroke-width:1;'
-            	+ 'stroke:' + options.foreground + ';fill:' + options.foreground + ';" ',
+                + 'stroke:' + options.foreground + ';fill:' + options.foreground + ';" ',
             rectFoot = '></path>';
 
         // draw in the svg
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-            	if (qrcode.isDark(row, col)) {
-					x = col * 10;
-					y = row * 10 * scale;
-					dx = (col + 1) * 10;
-					dy = (row + 1) * 10 * scale;
-					
-					svg += rectHead + 'd="M ' + x + ',' + y
-					+ ' L ' + dx + ',' + y
-					+ ' L ' + dx + ',' + dy
-					+ ' L ' + x + ',' + dy
-					+ ' Z"';
-					
-					svg += rectFoot;
-				}
+                if (qrcode.isDark(row, col)) {
+                    x = col * 10;
+                    y = row * 10 * scale;
+                    dx = (col + 1) * 10;
+                    dy = (row + 1) * 10 * scale;
+
+                    svg += rectHead + 'd="M ' + x + ',' + y
+                        + ' L ' + dx + ',' + y
+                        + ' L ' + dx + ',' + dy
+                        + ' L ' + x + ',' + dy
+                        + ' Z"';
+
+                    svg += rectFoot;
+                }
             }
         }
 
