@@ -30,21 +30,20 @@
         var canvas = document.createElement('canvas'),
             context = canvas.getContext('2d'),
             moduleCount = qrcode.getModuleCount(), // qrcode count
-            width = options.width / moduleCount, // compute width based on options.width
-            height = options.height / moduleCount; // compute height based on options.height
+            width = options.width / moduleCount.toPrecision(4), // compute width based on options.width
+            height = options.height / moduleCount.toPrecision(4); // compute height based on options.height
 
         canvas.width = options.width;
         canvas.height = options.height;
-        context.fillStyle = options.background;
-        context.fillRect(0, 0, options.width, options.height);
 
         // draw in the canvas
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-                if (qrcode.isDark(row, col)) {
-                    context.fillStyle = options.foreground;
-                    context.fillRect(col * width, row * height, width, height);
-                }
+                var w = (Math.ceil((col + 1) * width) - Math.floor(col * width)),
+                    h = (Math.ceil((row + 1) * width) - Math.floor(row * width));
+
+                context.fillStyle = qrcode.isDark(row, col) ? options.foreground : options.background;
+                context.fillRect(Math.round(col * width), Math.round(row * height), w, h);
             }
         }
         // return just built canvas
