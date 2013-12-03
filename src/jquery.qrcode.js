@@ -71,7 +71,7 @@
                 + 'path="M 0,0 L ' + dx + ',0 L ' + dx + ',' + dy + ' L 0,' + dy +' X"></vml:shape>',
             rectHead = '<vml:shape style="behavior:url(#default#VML);width:10px;height:10px;padding:0;'
             	+ 'margin:0;border:none;" stroked="true" filled="true" strokeweight="1px" '
-            	+ 'strokecolor="' + options.foreground + '" fillcolor="' + options.foreground + '" '
+            	+ 'strokecolor="' + options.foreground + '" fillcolor="' + options.foreground + '" ',
             rectFoot = '></vml:shape>';
 
         // draw in the vml
