@@ -27,7 +27,7 @@
     // draw qrcode by canvas
     function createCanvas(qrcode, options){
         // create canvas element
-        var x, y,
+        var x, y, w, h,
             canvas = document.createElement('canvas'),
             context = canvas.getContext('2d'),
             moduleCount = qrcode.getModuleCount(), // qrcode count
@@ -42,11 +42,11 @@
             for (var col = 0; col < moduleCount; col++) {
                 x = Math.round(col * width);
                 y = Math.round(row * height);
-                width = (Math.ceil((col + 1) * width) - Math.floor(col * width)),
-                height = (Math.ceil((row + 1) * height) - Math.floor(row * height));
+                w = (Math.ceil((col + 1) * width) - Math.floor(col * width));
+                h = (Math.ceil((row + 1) * height) - Math.floor(row * height));
 
                 context.fillStyle = qrcode.isDark(row, col) ? options.foreground : options.background;
-                context.fillRect(x, y, width, height);
+                context.fillRect(x, y, w, h);
             }
         }
         
@@ -56,8 +56,8 @@
 
     // draw qrcode by vml
     function createVML(qrcode, options){
-        var moduleCount = qrcode.getModuleCount(),
-            x = y = 0,
+        var x, y,
+            moduleCount = qrcode.getModuleCount(),
             dx = dy = moduleCount * 10,
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
                 + 'style="behavior:url(#default#VML);position:relative;'
@@ -104,9 +104,9 @@
 
     // draw qrcode by svg
     function createSVG(qrcode, options){
-        var moduleCount = qrcode.getModuleCount(),
+        var x, y,
+            moduleCount = qrcode.getModuleCount(),
             scale = options.height / options.width,
-            x = y = 0,
             dx = moduleCount * 10,
             dy = moduleCount * 10 * scale,
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
