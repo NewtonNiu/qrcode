@@ -58,18 +58,18 @@
     function createVML(qrcode, options){
         var x, y,
             moduleCount = qrcode.getModuleCount(),
-            dx = dy = moduleCount * 10,
+            dx = dy = moduleCount * 16,
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
                 + 'style="behavior:url(#default#VML);position:relative;'
                 + 'display:block;padding:0;margin:0;border:none;'
                 + 'width:' + (options.width - 2) * moduleCount + 'px;'
                 + 'height:' + (options.height - 2) * moduleCount + 'px;" '
                 + 'coordorigin="0,0" coordsize="' + dx + ',' + dy + '">'
-                + '<vml:shape style="behavior:url(#default#VML);width:10px;height:10px;padding:0;'
+                + '<vml:shape style="behavior:url(#default#VML);width:16px;height:16px;padding:0;'
                 + 'margin:0;border:none;" stroked="true" filled="true" strokeweight="0" '
                 + 'strokecolor="' + options.background + '" fillcolor="' + options.background + '" '
                 + 'path="M 0,0 L ' + dx + ',0 L ' + dx + ',' + dy + ' L 0,' + dy + ' X"></vml:shape>',
-            rectHead = '<vml:shape style="behavior:url(#default#VML);width:10px;height:10px;padding:0;'
+            rectHead = '<vml:shape style="behavior:url(#default#VML);width:16px;height:16px;padding:0;'
                 + 'margin:0;border:none;" stroked="true" filled="true" strokeweight="0" '
                 + 'strokecolor="' + options.foreground + '" fillcolor="' + options.foreground + '" ',
             rectFoot = '></vml:shape>';
@@ -78,10 +78,10 @@
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
                 if (qrcode.isDark(row, col)) {
-                    x = col * 10;
-                    y = row * 10;
-                    dx = (col + 1) * 10;
-                    dy = (row + 1) * 10;
+                    x = col * 16;
+                    y = row * 16;
+                    dx = (col + 1) * 16;
+                    dy = (row + 1) * 16;
 
                     vml += rectHead + 'path="M ' + x + ',' + y
                         + ' L ' + dx + ',' + y
@@ -107,8 +107,8 @@
         var x, y,
             moduleCount = qrcode.getModuleCount(),
             scale = options.height / options.width,
-            dx = moduleCount * 10,
-            dy = moduleCount * 10 * scale,
+            dx = moduleCount * 16,
+            dy = moduleCount * 16 * scale,
             svg = '<svg xmlns="http://www.w3.org/2000/svg" '
                 + 'width="' + options.width + 'px" height="' + options.height + 'px" '
                 + 'style="padding:0;margin:0;border:none;background:' + options.background + ';" '
@@ -121,10 +121,10 @@
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
                 if (qrcode.isDark(row, col)) {
-                    x = col * 10;
-                    y = row * 10 * scale;
-                    dx = (col + 1) * 10;
-                    dy = (row + 1) * 10 * scale;
+                    x = col * 16;
+                    y = row * 16 * scale;
+                    dx = (col + 1) * 16;
+                    dy = (row + 1) * 16 * scale;
 
                     svg += rectHead + 'd="M ' + x + ',' + y
                         + ' L ' + dx + ',' + y
