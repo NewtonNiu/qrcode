@@ -42,8 +42,8 @@
             for (var col = 0; col < moduleCount; col++) {
                 x = Math.round(col * width);
                 y = Math.round(row * height);
-                w = (Math.ceil((col + 1) * width) - Math.floor(col * width));
-                h = (Math.ceil((row + 1) * height) - Math.floor(row * height));
+                w = Math.ceil((col + 1) * width) - Math.floor(col * width);
+                h = Math.ceil((row + 1) * height) - Math.floor(row * height);
 
                 context.fillStyle = qrcode.isDark(row, col) ? options.foreground : options.background;
                 context.fillRect(x, y, w, h);
