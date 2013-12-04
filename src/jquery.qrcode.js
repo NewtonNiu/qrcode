@@ -27,7 +27,8 @@
     // draw qrcode by canvas
     function createCanvas(qrcode, options){
         // create canvas element
-        var canvas = document.createElement('canvas'),
+        var x, y,
+            canvas = document.createElement('canvas'),
             context = canvas.getContext('2d'),
             moduleCount = qrcode.getModuleCount(), // qrcode count
             width = options.width / moduleCount.toPrecision(4), // compute width based on options.width
@@ -39,11 +40,13 @@
         // draw in the canvas
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-                var w = (Math.ceil((col + 1) * width) - Math.floor(col * width)),
-                    h = (Math.ceil((row + 1) * width) - Math.floor(row * width));
+                x = Math.round(col * width);
+                y = Math.round(row * height);
+                width = (Math.ceil((col + 1) * width) - Math.floor(col * width)),
+                height = (Math.ceil((row + 1) * height) - Math.floor(row * height));
 
                 context.fillStyle = qrcode.isDark(row, col) ? options.foreground : options.background;
-                context.fillRect(Math.round(col * width), Math.round(row * height), w, h);
+                context.fillRect(x, y, width, height);
             }
         }
         
