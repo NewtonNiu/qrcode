@@ -1,4 +1,4 @@
-qrcode
+Qrcode
 ======
 >a javascript qrcode
 
