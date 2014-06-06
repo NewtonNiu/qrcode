@@ -1,7 +1,6 @@
 qrcode
 ======
-
-a javascript qrcode
+>a javascript qrcode
 
 ### Introduction
 ```js
