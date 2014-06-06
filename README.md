@@ -3,7 +3,7 @@ qrcode
 
 a javascript qrcode
 
-### Intro
+### Introduction
 ```js
     $('#qrcode').qrcode({
         render: 'auto', // 默认auto，可选auto、canvas、svg、vml
