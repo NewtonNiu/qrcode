@@ -30,7 +30,7 @@
         var x, y, w, h,
             canvas = document.createElement('canvas'),
             context = canvas.getContext('2d'),
-            moduleCount = qrcode.getModuleCount(), // qrcode count
+            moduleCount = qrcode.length, // qrcode count
             width = options.width / moduleCount.toPrecision(4), // compute width based on options.width
             height = options.height / moduleCount.toPrecision(4); // compute height based on options.height
 
@@ -45,19 +45,19 @@
                 w = Math.ceil((col + 1) * width) - Math.floor(col * width);
                 h = Math.ceil((row + 1) * height) - Math.floor(row * height);
 
-                context.fillStyle = qrcode.isDark(row, col) ? options.foreground : options.background;
+                context.fillStyle = qrcode[row][col] ? options.foreground : options.background;
                 context.fillRect(x, y, w, h);
             }
         }
-        
+
         // return just built canvas
         return canvas;
     }
 
     // draw qrcode by vml
     function createVML(qrcode, options){
-        var x, y,
-            moduleCount = qrcode.getModuleCount(),
+        var x, y, dy,
+            moduleCount = qrcode.length,
             dx = dy = moduleCount * 16,
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
                 + 'style="behavior:url(#default#VML);position:relative;'
@@ -77,7 +77,7 @@
         // draw in the vml
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-                if (qrcode.isDark(row, col)) {
+                if (qrcode[row][col]) {
                     x = col * 16;
                     y = row * 16;
                     dx = (col + 1) * 16;
@@ -105,7 +105,7 @@
     // draw qrcode by svg
     function createSVG(qrcode, options){
         var x, y,
-            moduleCount = qrcode.getModuleCount(),
+            moduleCount = qrcode.length,
             scale = options.height / options.width,
             dx = moduleCount * 16,
             dy = moduleCount * 16 * scale,
@@ -120,7 +120,7 @@
         // draw in the svg
         for (var row = 0; row < moduleCount; row++) {
             for (var col = 0; col < moduleCount; col++) {
-                if (qrcode.isDark(row, col)) {
+                if (qrcode[row][col]) {
                     x = col * 16;
                     y = row * 16 * scale;
                     dx = (col + 1) * 16;
@@ -161,35 +161,45 @@
         // set default values
         // typeNumber < 1 for automatic calculation
         options = $.extend({}, {
-            render: "auto",
-            width: 256,
-            height: 256,
-            typeNumber: -1,
-            correctLevel: 'H',
-            background: "#ffffff",
-            foreground: "#000000"
+            render: "auto", // 默认auto，可选auto、canvas、svg、vml
+            width: 256, // 二维码宽度，默认256
+            height: 256, // 二维码高度，默认256
+            version: -1, // 二维码版本，-1为自动，可选1-40以下数字（包括1和40），小于零等同于-1
+            ecLevel: 'H', // 纠错级别，默认H，可选H、Q、M、L（区分大小写）
+            mode: 'EightBit', // 编码模式，默认EightBit，可选EightBit、AlphaNumeric、Numeric（区分大小写）
+            background: "#ffffff", // 背景色，默认白色，可选任何颜色
+            foreground: "#000000", // 前景色，默认黑色，可选任何颜色
+            onError: $.noop // 编码错误回调函数
         }, options);
 
         return this.each(function (){
-            var element;
-            var qrcode;
+            var element, QRCode, Version, PixArr, ECLevel, Mode;
 
-            qrcode = new QRCode(options.typeNumber, options.correctLevel);
-            qrcode.addData(options.text);
-            qrcode.make();
+            QRCode = new QREncode();
+            ECLevel = QRBase.ERROR_CORRECTION_LEVEL[options.ecLevel];
+            Mode = QRBase.MODE[options.mode] || QRCode.MODE.EightBit;
+
+            try {
+                Version = (options.version >= 1 && options.version <= 40)
+                    ? options.version
+                    : QRCode.getVersionFromLength(ECLevel, Mode, options.text);
+                PixArr = QRCode.encodeToPix(Mode, options.text, Version, ECLevel);
+            } catch (e) {
+                $.isFunction(options.onError) && options.onError.call(this, e);
+            }
 
             switch (options.render) {
                 case "canvas":
-                    element = createCanvas(qrcode, options);
+                    element = createCanvas(PixArr, options);
                     break;
                 case "svg":
-                    element = createSVG(qrcode, options);
+                    element = createSVG(PixArr, options);
                     break;
                 case "vml":
-                    element = createVML(qrcode, options);
+                    element = createVML(PixArr, options);
                     break;
                 default:
-                    element = createDefault(qrcode, options);
+                    element = createDefault(PixArr, options);
                     break;
             }
 
