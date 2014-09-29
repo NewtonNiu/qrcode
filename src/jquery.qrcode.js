@@ -27,7 +27,7 @@
     // draw qrcode by canvas
     function createCanvas(qrcode, options){
         // create canvas element
-        var x, y, w, h,
+        var i, j, x, y, w, h,
             canvas = document.createElement('canvas'),
             context = canvas.getContext('2d'),
             moduleCount = qrcode.length, // qrcode count
@@ -38,14 +38,14 @@
         canvas.height = options.height;
 
         // draw in the canvas
-        for (var row = 0; row < moduleCount; row++) {
-            for (var col = 0; col < moduleCount; col++) {
-                x = Math.round(col * width);
-                y = Math.round(row * height);
-                w = Math.ceil((col + 1) * width) - Math.floor(col * width);
-                h = Math.ceil((row + 1) * height) - Math.floor(row * height);
+        for (i = 0; i < moduleCount; i++) {
+            for (j = 0; j < moduleCount; j++) {
+                x = Math.round(i * width);
+                y = Math.round(j * height);
+                w = Math.ceil((i + 1) * width) - Math.floor(i * width);
+                h = Math.ceil((j + 1) * height) - Math.floor(j * height);
 
-                context.fillStyle = qrcode[row][col] ? options.foreground : options.background;
+                context.fillStyle = qrcode[i][j] ? options.foreground : options.background;
                 context.fillRect(x, y, w, h);
             }
         }
@@ -56,7 +56,7 @@
 
     // draw qrcode by vml
     function createVML(qrcode, options){
-        var x, y, dy,
+        var i, j, x, y, dy,
             moduleCount = qrcode.length,
             dx = dy = moduleCount * 16,
             vml = '<vml:group xmlns:vml="urn:schemas-microsoft-com:vml" '
@@ -75,13 +75,13 @@
             rectFoot = '></vml:shape>';
 
         // draw in the vml
-        for (var row = 0; row < moduleCount; row++) {
-            for (var col = 0; col < moduleCount; col++) {
-                if (qrcode[row][col]) {
-                    x = col * 16;
-                    y = row * 16;
-                    dx = (col + 1) * 16;
-                    dy = (row + 1) * 16;
+        for (i = 0; i < moduleCount; i++) {
+            for (j = 0; j < moduleCount; j++) {
+                if (qrcode[i][j]) {
+                    x = i * 16;
+                    y = j * 16;
+                    dx = (i + 1) * 16;
+                    dy = (j + 1) * 16;
 
                     vml += rectHead + 'path="M ' + x + ',' + y
                         + ' L ' + dx + ',' + y
@@ -104,7 +104,7 @@
 
     // draw qrcode by svg
     function createSVG(qrcode, options){
-        var x, y,
+        var i, j, x, y,
             moduleCount = qrcode.length,
             scale = options.height / options.width,
             dx = moduleCount * 16,
@@ -118,13 +118,13 @@
             rectFoot = '></path>';
 
         // draw in the svg
-        for (var row = 0; row < moduleCount; row++) {
-            for (var col = 0; col < moduleCount; col++) {
-                if (qrcode[row][col]) {
-                    x = col * 16;
-                    y = row * 16 * scale;
-                    dx = (col + 1) * 16;
-                    dy = (row + 1) * 16 * scale;
+        for (i = 0; i < moduleCount; i++) {
+            for (j = 0; j < moduleCount; j++) {
+                if (qrcode[i][j]) {
+                    x = i * 16;
+                    y = j * 16 * scale;
+                    dx = (i + 1) * 16;
+                    dy = (j + 1) * 16 * scale;
 
                     svg += rectHead + 'd="M ' + x + ',' + y
                         + ' L ' + dx + ',' + y
