@@ -176,7 +176,7 @@
             var element, QRCode, Version, PixArr, ECLevel, Mode;
 
             QRCode = new QREncode();
-            ECLevel = QRBase.ERROR_CORRECTION_LEVEL[options.ecLevel];
+            ECLevel = QRBase.ERROR_CORRECTION_LEVEL[options.ecLevel] || QRBase.ERROR_CORRECTION_LEVEL.H;
             Mode = QRBase.MODE[options.mode] || QRCode.MODE.EightBit;
 
             try {
