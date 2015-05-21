@@ -1,5 +1,6 @@
-Qrcode
+jquery-qrcode
 ======
+
 >a javascript qrcode
 
 ### Introduction
