@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>QRCode</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    </head>
-    <body>
-        <div style="position: absolute;top: 10px;left: 50%;">
-            <div style="position: relative; top: 0; left: -50%;">
-                <div id="qrcode"></div>
-            </div>
-        </div>
-        <script type="text/javascript" src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="./src/qrbase.js"></script>
-        <script type="text/javascript" src="./src/reedsolomon.js"></script>
-        <script type="text/javascript" src="./src/encode.js"></script>
-        <script type="text/javascript" src="./src/jquery.qrcode.js"></script>
-        <script type="text/javascript">
-            $('#qrcode').qrcode({
-                render: 'auto', // 默认auto，可选auto、canvas、svg、vml
-                text: 'QRCode', // 编码内容
-                width: 300, // 二维码宽度，默认256
-                height: 300, // 二维码高度，默认256
-                version: -1, // 二维码版本，-1为自动，可选1-40以下数字（包括1和40），小于零等同于-1
-                ecLevel: 'H', // 纠错级别，默认H，可选H、Q、M、L（区分大小写）
-                mode: 'EightBit', // 编码模式，默认EightBit，可选EightBit、AlphaNumeric、Numeric（区分大小写）
-                background: '#ffffff', // 背景色，默认白色，可选任何颜色
-                foreground: '#000000', // 前景色，默认黑色，可选任何颜色
-                onError: function (e){
-                    alert(e.message);
-                } // 编码错误回调函数
-            });
-        </script>
-    </body>
+  <head>
+    <title>QRCode</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <div style="position: absolute;top: 10px;left: 50%;">
+      <div style="position: relative; top: 0; left: -50%;">
+        <div id="qrcode"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./src/qrbase.js"></script>
+    <script type="text/javascript" src="./src/reedsolomon.js"></script>
+    <script type="text/javascript" src="./src/encode.js"></script>
+    <script type="text/javascript" src="./src/jquery.qrcode.js"></script>
+    <script type="text/javascript">
+      $('#qrcode').qrcode({
+        render: 'auto', // 默认auto，可选auto、canvas、svg、vml
+        text: 'QRCode', // 编码内容
+        width: 300, // 二维码宽度，默认256
+        height: 300, // 二维码高度，默认256
+        version: -1, // 二维码版本，-1为自动，可选1-40以下数字（包括1和40），小于零等同于-1
+        ecLevel: 'H', // 纠错级别，默认H，可选H、Q、M、L（区分大小写）
+        mode: 'EightBit', // 编码模式，默认EightBit，可选EightBit、AlphaNumeric、Numeric（区分大小写）
+        background: '#ffffff', // 背景色，默认白色，可选任何颜色
+        foreground: '#000000', // 前景色，默认黑色，可选任何颜色
+        onError: function (e){
+          alert(e.message);
+        } // 编码错误回调函数
+      });
+    </script>
+  </body>
 </html>
