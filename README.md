@@ -16,7 +16,7 @@ $('#qrcode').qrcode({
   background: '#ffffff', // 背景色，默认白色，可选任何颜色
   foreground: '#000000', // 前景色，默认黑色，可选任何颜色
   onError: function (e){
-      alert(e.message);
+    alert(e.message);
   } // 编码错误回调函数
 });
 ```
