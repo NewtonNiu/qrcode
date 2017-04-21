@@ -1,5 +1,4 @@
-jquery-qrcode
-======
+# jquery-qrcode
 
 >a javascript qrcode
 
